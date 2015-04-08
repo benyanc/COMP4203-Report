@@ -9,15 +9,16 @@
 \contentsline {subsection}{\numberline {2.2}TUN Devices}{6}
 \contentsline {subsection}{\numberline {2.3}Data Encapsulation}{6}
 \contentsline {subsubsection}{\numberline {2.3.1}XBee Fragments}{6}
-\contentsline {subsubsection}{\numberline {2.3.2}Wireless Security}{7}
+\contentsline {subsubsection}{\numberline {2.3.2}Wireless Security}{8}
+\contentsline {subsubsection}{\numberline {2.3.3}Compression}{9}
 \contentsline {subsection}{\numberline {2.4}Summary}{9}
-\contentsline {section}{\numberline {3}System and Implementation Details}{9}
-\contentsline {subsection}{\numberline {3.1}Description of the System}{9}
-\contentsline {subsubsection}{\numberline {3.1.1}Component Breakdown}{9}
-\contentsline {subsubsection}{\numberline {3.1.2}XBLink}{10}
-\contentsline {subsection}{\numberline {3.2}Configuration of XBee Modules}{12}
-\contentsline {subsection}{\numberline {3.3}Sample Usage}{12}
-\contentsline {subsubsection}{\numberline {3.3.1}Network Applications}{12}
+\contentsline {section}{\numberline {3}System and Implementation Details}{10}
+\contentsline {subsection}{\numberline {3.1}Description of the System}{10}
+\contentsline {subsubsection}{\numberline {3.1.1}Component Breakdown}{10}
+\contentsline {subsubsection}{\numberline {3.1.2}XBLink}{12}
+\contentsline {subsection}{\numberline {3.2}Configuration of XBee Modules}{13}
+\contentsline {subsection}{\numberline {3.3}Sample Usage}{13}
+\contentsline {subsubsection}{\numberline {3.3.1}Network Applications}{13}
 \contentsline {subsection}{\numberline {3.4}Simple Performance Analysis}{13}
 \contentsline {section}{\numberline {4}Summary}{16}
 \contentsline {subsection}{\numberline {4.1}Possible Future Directions}{16}
