@@ -135,7 +135,7 @@ The standard allows the creation of two types of networks: a star network, where
   \label{fig:ieee_802_15_topologies}
 \end{figure}
 
-The XBee modules are full-function devices, so they can each act as a coordinator. Since we are working with only 2 devices, we arbitrarily choose one to be the coordinator, and set up a simple peer-to-peer network between the two devices. Although the manufacturer's specifications state that the RF line of sight range for many XBee models are on the order of kilometres, we have found that effective indoor distances, without data loss, are limited to a few metres. 
+The XBee modules are full-function devices, so they can each act as a coordinator. Since we are working with only 2 devices, we arbitrarily choose one to be the coordinator, and set up a simple peer-to-peer network between the two devices. The manufacturer's specifications state that the RF line of sight range for our XBee model is about 100m. We verified that this is roughly accurate; this is shown in Section~\ref{subsec:xbee_performance}. 
 
 \begin{figure}[ht]
 \centering
@@ -214,7 +214,7 @@ As mentioned in the previous section, we create a network connection between two
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[scale=.9]{xbee_subsystems.png}
+\includegraphics[scale=.4]{xbee_subsystems.pdf}
 \caption{Data is sent from Node 1 to Node 2 through the various subsystems}
 \label{fig:xbee_subsystems}
 \end{figure}
@@ -223,7 +223,7 @@ In Figure~\ref{fig:xbee_system_distribution}, we show the network components and
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[scale=.9]{xbee_system_distribution.png}
+\includegraphics[scale=.5]{xbee_system_distribution.pdf}
 \caption{Component distribution in the XBee-based network}
 \label{fig:xbee_system_distribution}
 \end{figure}
@@ -301,15 +301,49 @@ Finally, we show that we are able to create a secure connection from one node to
 \end{figure}
 
 \subsection{Simple Performance Analysis}
-To gain a rough idea of the performance of the XBee network, we perform a number of ping operations at different packet sizes, and analyze the data rates for each packet size. Figure~\ref{fig:xbee_performance} shows the various packet sizes used, in bytes, and the required average roundtrip time. The figure also shows, for the pings, the percentage of packets that were lost during transmission.
+\label{subsec:xbee_performance}
+\subsubsection{Range Performance}
+First, we were interested in verifying that the range of the XBee modules is as advertised. To do this, we send 10 pings between the two modules at various distances, with no obstructions in the line of sight, and record the average roundtrip time. The ping packet sizes are the default value of 64 bytes. The data is shown in Figure~\ref{fig:xbee_range_graph}. We can see that the performance is steady between 0 and 90m ranges, and the average roundtrip time remains at about 500ms. However, around 100m ranges or more, the roundtrip time increases significantly. This is due to increasing percentages of packet loss, which is caused by the weaker signal at these ranges. So, we conclude that reliable performance can be maintained at close ranges below 90-100m, with this particular XBee model.
+
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=.8]{xbee_performance.png}
-\caption{A comparison of data transfer performance under different conditions}
-\label{fig:xbee_performance}
+\includegraphics[scale=.9]{xbee_range_graph.pdf}
+\caption{XBee module performance at various ranges}
+\label{fig:xbee_range_graph}
 \end{figure}
 
-From the figure, we immediately notice that higher number of packets were lost for larger packet sizes. It is possible that the ping program does not wait long enough for the XBee modules to send all the fragments of the packet, and erroneously considers the packets lost. It is also interesting that the transmission durations appear to increase over time, for larger packet sizes. This further supports the hypothesis above, since the modules have not completely transmitted all of the fragments in the first packet, before another packet is queued. If this is indeed the reason for the lost packets, then that means that the system should work for programs other than ping, where an immediate response from the other node is not required. In fact, we have seen that transferring files on the order of kilobytes works without loss.
+\subsubsection{Speed Performance}
+To gain a rough idea of the speed of the XBee network, we perform a number of ping operations at different packet sizes, and analyze the data rates for each packet size. Figure~\ref{fig:xbee_performance_graph} shows the various packet sizes used, in bytes, and the required average roundtrip time. The graph also shows the percentage of packets that were lost during transmission. We notice that the transfer rates are steady around 450B/s, when the packet sizes are small. However, at a packet size of 512B or greater, we see a significant drop in performance, as the transfer rate dips to 150B/s. The rate does appear to increase beyond this point, to approach the steady rate seen at low packet sizes.
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=.65]{xbee_performance_graph.pdf}
+\caption{A comparison of data transfer performance at various packet sizes}
+\label{fig:xbee_performance_graph}
+\end{figure}
+
+From the figure, we immediately notice that higher number of packets were lost for larger packet sizes. It is possible that the ping program does not wait long enough for the XBee modules to send all the fragments of the packet, and erroneously considers the packets lost. We know that by default, a packet is sent every second by ping. It is also interesting that the transmission durations appear to increase over time, for larger packet sizes. This further supports the hypothesis above, since the modules have not completely transmitted all of the fragments in the first packet, before another packet is queued. If this is indeed the reason for the lost packets, then that means that the system should work for programs other than ping, where an immediate response from the other node is not required. In fact, we have seen that transferring files on the order of kilobytes works without loss.
+
+To test this hypothesis, we compute the roundtrip time required to send a number of large packets, at an interval of 1 second each. We can approximate this using the following model: the first packet is sent at a rate of 500B/s, so, given a packet of size P, the roundtrip time for the first packet equals:
+\begin{equation}
+\label{eq:packet_1_rtt}
+RTT_1=\frac{2P}{500B/s}
+\end{equation}
+
+For subsequent packets, if each packet can be transmitted in under 1 second, then the roundtrip time is the same as the initial packet. Otherwise, assuming that each packet requires more than 1 second to transmit, the time taken between the start of the transmission and the completion of the roundtrip equals the time required to transmit the previous packet, minus 1 second for the delay, plus the time required to transmit the subsequent packet. This is a recurrence relation:
+
+\begin{equation}
+\label{eq:packet_n_rtt}
+RTT_n=RTT_{n-1} -1 + \frac{2P}{500B/s}
+\end{equation}
+
+Given this recurrence relation, we can model the roundtrip time required for each packet size, as measured by ping. Figure~\ref{fig:xbee_performance_table} shows that the model's roundtrip times for each packet number, as well as the average time, all match well with the measured values. This further suggests that our above hypothesis is correct, and that no data is actually lost in the transmission of large packets.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=.65]{xbee_performance_table.pdf}
+\caption{A comparison between data rates from measurement and recurrence model}
+\label{fig:xbee_performance_table}
+\end{figure}
 
 Disregarding measurements with packet losses, we see that the computed average data transfer rate is about 440B/s. However, this does not consider that there are extra headers in each packet, which can significantly increase the data size for small packets. Either way, we see that the data rate is relatively steady for all packet sizes below 256B. The rate is slower than the maximum theoretical rate allowed for XBee devices, and we suspect that it is possible to increase the data rate by tweaking our implementation.
 

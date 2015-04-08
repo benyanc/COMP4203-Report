@@ -15,10 +15,12 @@
 \contentsline {section}{\numberline {3}System and Implementation Details}{10}
 \contentsline {subsection}{\numberline {3.1}Description of the System}{10}
 \contentsline {subsubsection}{\numberline {3.1.1}Component Breakdown}{10}
-\contentsline {subsubsection}{\numberline {3.1.2}XBLink}{12}
+\contentsline {subsubsection}{\numberline {3.1.2}XBLink}{10}
 \contentsline {subsection}{\numberline {3.2}Configuration of XBee Modules}{13}
-\contentsline {subsection}{\numberline {3.3}Sample Usage}{13}
-\contentsline {subsubsection}{\numberline {3.3.1}Network Applications}{13}
-\contentsline {subsection}{\numberline {3.4}Simple Performance Analysis}{13}
-\contentsline {section}{\numberline {4}Summary}{16}
-\contentsline {subsection}{\numberline {4.1}Possible Future Directions}{16}
+\contentsline {subsection}{\numberline {3.3}Sample Usage}{14}
+\contentsline {subsubsection}{\numberline {3.3.1}Network Applications}{14}
+\contentsline {subsection}{\numberline {3.4}Simple Performance Analysis}{15}
+\contentsline {subsubsection}{\numberline {3.4.1}Range Performance}{15}
+\contentsline {subsubsection}{\numberline {3.4.2}Speed Performance}{16}
+\contentsline {section}{\numberline {4}Summary}{18}
+\contentsline {subsection}{\numberline {4.1}Possible Future Directions}{19}
