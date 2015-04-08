@@ -1,0 +1,143 @@
+@misc{wiki_internet,
+	title="Internet",
+	author="\textrm{Wikipedia.org}",
+	note="\url{Electronic: http://en.wikipedia.org/wiki/Internet}",
+	}
+
+@misc{wiki_tcp_ip,
+	title="Internet Protocol Suite",
+	author="\textrm{Wikipedia.org}",
+	note="\url{Electronic: http://en.wikipedia.org/wiki/Internet_protocol_suite}",
+	}
+
+@misc{digi_xbee,
+	title=“XBee”,
+	author="\textrm{Digi International Inc.}”,
+	note="\url{Electronic: http://www.digi.com/xbee/}",
+	}
+
+@misc{ftdichip,
+	title=“Future Technology Devices International Ltd.”,
+	author="\textrm{Future Technology Devices International Ltd.}”,
+	note="\url{Electronic: http://www.ftdichip.com/index.html}",
+	}
+	
+@misc{wiki_tun_tap,
+	title=“TUN/TAP”,
+	author="\textrm{Wikipedia.org}",
+	note="\url{Electronic: http://en.wikipedia.org/wiki/TUN/TAP}",
+	}
+
+@misc{libxbee,
+	title=“libxbee”,
+	author="\textrm{Google Project Hosting}”,
+	note="\url{Electronic: https://code.google.com/p/libxbee/}",
+	}
+
+@misc{java_tutorials_datagram,
+	title="Java Tutorials: What is a Datagram?",
+	author="\textrm{Oracle Corporation}",
+	note="\url{Electronic: https://docs.oracle.com/javase/tutorial/networking/datagrams/definition.html}",
+	}
+	
+@misc{wiki_stream_socket,
+	title="Stream Socket",
+	author="\textrm{Wikipedia.org}",
+	note="\url{Electronic: http://en.wikipedia.org/wiki/Stream_socket}",
+	}
+
+@misc{wiki_datagram_socket,
+	title="Datagram Socket",
+	author="\textrm{Wikipedia.org}",
+	note="\url{Electronic: http://en.wikipedia.org/wiki/Stream_socket}",
+	}
+
+@misc{wiki_shors,
+	title="Shor's Algorithm",
+	author="\textrm{Wikipedia.org}",
+	note="\url{Electronic: http://en.wikipedia.org/wiki/Datagram_socket}",
+	}
+
+@misc{wiki_grovers,
+	title="Grover's Algorithm",
+	author="\textrm{Wikipedia.org}",
+	note="\url{Electronic: http://en.wikipedia.org/wiki/Grover's_algorithm}",
+	}
+
+@misc{wiki_BB84,
+	title="BB84",
+	author="\textrm{Wikipedia.org}",
+	note="\url{Electronic: http://en.wikipedia.org/wiki/BB84}",
+	}
+
+@misc{wiki_no_cloning,
+	title="No-cloning theorem",
+	author="\textrm{Wikipedia.org}",
+	note="\url{Electronic: http://en.wikipedia.org/wiki/No-cloning_theorem}",
+	}
+
+@misc{wiki_QCD,
+	title="Quantum key distribution",
+	author="\textrm{Wikipedia.org}",
+	note="\url{Electronic: http://en.wikipedia.org/wiki/Quantum_key_distribution}",
+	}
+
+@book{Shankar,
+    author    = "R. Shankar",
+    title     = "Principles of Quantum Mechanics",
+    year      = "1994",
+    publisher = "Springer",
+    address   = "New York, NY",
+    edition   = 2
+}
+
+@book{Nicholson,
+    author    = "Nicholson, W. Keith",
+    title     = "Linear Algebra",
+    year      = "2003",
+    publisher = "McGraw-Hill Ryerson Limited",
+    address   = "Toronto, Ontario",
+    edition   = 4
+}
+
+@article{chailloux,
+    author  = "Andre Chailloux and Iordanis Kerenidis",
+    title   = "Optimal quantum strong coin flipping",
+    year    = "2009",
+    journal = "50th Annual IEEE Symposium on Foundations of Computer Science",
+    pages   = "527--533"
+}
+
+@article{Yuen,
+    author  = "Yuen, Horace P.",
+    title   = "Key Generation: Foundations and a New Quantum Approach",
+    year    = "2009",
+    journal = "IEEE JOURNAL OF SELECTED TOPICS IN QUANTUM ELECTRONICS",
+    volume  = "15",
+    number  = "6",
+    pages   = "1630--1645"
+}
+
+@article{Mandal,
+    author  = "Sayonnha Mandal et al.",
+    title   = "Multi-Photon Implementation of Three-Stage Quantum Cryptography Protocol",
+    year    = "2013",
+    journal = "Information Networking (ICOIN), 2013 International Conference on ",
+    pages   = "6--11"
+}
+	
+@article{Mosca,
+    author  = "Michele Mosca",
+    title   = "Quantum Computing, Cryptography and Compilers",
+    year    = "2012",
+    journal = "IEEE 42nd International Symposium on Multiple-Valued Logic",
+    pages   = "154--156"
+}
+		
+@article{Johnson,
+    author  = " M.W. Johnson et al.",
+    title   = "Quantum annealing with manufactured spins",
+    year    = "2011",
+    journal = "Nature",
+    pages   = "194--198"
+}

@@ -1,0 +1,77 @@
+\begin{thebibliography}{10}
+
+\bibitem{wiki_internet}
+\textrm{Wikipedia.org}.
+\newblock Internet.
+\newblock \url{Electronic: http://en.wikipedia.org/wiki/Internet}.
+
+\bibitem{wiki_tcp_ip}
+\textrm{Wikipedia.org}.
+\newblock Internet protocol suite.
+\newblock \url{Electronic:
+  http://en.wikipedia.org/wiki/Internet_protocol_suite}.
+
+\bibitem{digi_xbee}
+\textrm{Digi International Inc.}
+\newblock Xbee.
+\newblock \url{Electronic: http://www.digi.com/xbee/}.
+
+\bibitem{ftdichip}
+\textrm{Future Technology Devices International Ltd.}
+\newblock Future technology devices international ltd.
+\newblock \url{Electronic: http://www.ftdichip.com/index.html}.
+
+\bibitem{wiki_tun_tap}
+\textrm{Wikipedia.org}.
+\newblock Tun/tap.
+\newblock \url{Electronic: http://en.wikipedia.org/wiki/TUN/TAP}.
+
+\bibitem{libxbee}
+\textrm{Google Project Hosting}.
+\newblock libxbee.
+\newblock \url{Electronic: https://code.google.com/p/libxbee/}.
+
+\bibitem{wiki_xbee}
+\textrm{Wikipedia.org}.
+\newblock Xbee.
+\newblock \url{Electronic: http://en.wikipedia.org/wiki/XBee}.
+
+\bibitem{wiki_ieee_802_15_4}
+\textrm{Wikipedia.org}.
+\newblock Ieee 802.15.4.
+\newblock \url{Electronic: http://en.wikipedia.org/wiki/IEEE_802.15.4}.
+
+\bibitem{sparkfun_xbee_usb}
+\textrm{SparkFun Electronics}.
+\newblock Xbee explorer usb.
+\newblock \url{Electronic: https://www.sparkfun.com/products/retired/8687}.
+
+\bibitem{wiki_device_file}
+\textrm{Wikipedia.org}.
+\newblock Device file.
+\newblock \url{Electronic: http://en.wikipedia.org/wiki/Device_file}.
+
+\bibitem{digi_xctu}
+\textrm{Digi International Inc.}
+\newblock Xctu.
+\newblock \url{Electronic:
+  http://www.digi.com/products/wireless-wired-embedded-solutions/zigbee-rf-modules/xctu}.
+
+\bibitem{backreference_tuntap}
+\textrm{Davide Brini}.
+\newblock Tun/tap interface tutorial.
+\newblock \url{Electronic:
+  http://backreference.org/2010/03/26/tuntap-interface-tutorial/}.
+
+\bibitem{digi_sending_data}
+\textrm{Digi International Inc.}
+\newblock Sending data through an 802.15.4 network latency timing.
+\newblock \url{Electronic:
+  http://www.digi.com/support/kbase/kbaseresultdetl?id=3065}.
+
+\bibitem{wiki_ipv4}
+\textrm{Wikipedia.org}.
+\newblock Ipv4.
+\newblock \url{Electronic: http://en.wikipedia.org/wiki/IPv4}.
+
+\end{thebibliography}
