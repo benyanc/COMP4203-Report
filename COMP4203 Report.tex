@@ -184,7 +184,9 @@ To do so, we have developed an encapsulation scheme for the 72byte XBee fragment
 In the case that we transmit several IP packets, each packet over several XBee fragments, it is possible that the packets may arrive out of order. This is the reason that we employ a 2 byte ID number, and a 2 byte fragment number. Figure~\ref{fig:xbee_packets_out_of_order} shows a potential scenario where a number of fragments representing several different IP packets arrive out of order, and we must rely on the ID and fragment number to correctly reconstruct the original message on the receiving device.
 
 \subsubsection{Wireless Security}
-It should be noted here that our implementation does not contain any security features. Specifically, our design is highly susceptible to man-in-the-middle attacks. This type of attack could be carried out by an adversary who intercepts our radio transmissions, modifies the information, and sends the modified data. It is also possible for an adversary to simply forge XBee fragments, using valid headers and payload, and broadcast the fragments to our XBee modules.
+It should be noted here that our implementation does not contain any security features. Currently, any security issue should be handled in the application layer. Programs like SSH and SFTP, or the HTTPS protocol already encrypt their contents before sending them over TCP.
+
+Our design is highly susceptible to man-in-the-middle attacks. This type of attack could be carried out by an adversary who intercepts our radio transmissions, modifies the information, and sends the modified data. It is also possible for an adversary to simply forge XBee fragments, using valid headers and payload, and broadcast the fragments to our XBee modules.
 
 To protect against this attack, we could use a secure encryption algorithm to encrypt the entire XBee fragment, and send the encrypted fragment. In this case, we already have a fragment number and a secret random ID inside the encrypted fragment, so the scheme would not be vulnerable to replay attacks. Alternatively, we could encrypt the IP packet, and send portions of the encrypted packet as payload in the XBee fragments. This method is less secure, because the header portion would be unencrypted, so an adversary could forge the header and perform a replay attack. In either case, we should also ensure the authenticity of each fragment by computing a message authentication code (MAC) for the fragment. This would consume additional bytes in each message.
 
@@ -320,6 +322,8 @@ For this project, we have designed and implemented a networking system, based on
 
 
 \subsection{Possible Future Directions}
+XBLink can be useful in many applications. For example, two mobile laptops (e.g. used in field work) that want to communicate with each other where there are no wireless area networks available, can use XBLink to create a network between them.
+
 As mentioned above, our system is designed with simplicity and speed in mind, and does not incorporate any security features. We have considered some modifications that would increase the security of the system, but they are not exhaustive. For the system to be used in real-world applications, the security aspect must be carefully considered and implemented. 
 
 Another area of potential future work involves expanding the network to multiple nodes. This is easily doable for a small number of nodes, since we can use the existing topology that uses one XBee module as the coordinator. However, as the number of nodes grows large, it will become infeasible for a single module to act as the coordinator for all nodes, both due to range and complexity constraints. In this case, a more distributed topology with many coordinators would be appropriate.
