@@ -3,15 +3,9 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: COMP4203 Report.aux
 The style file: unsrt.bst
 Database file #1: rep_ref.bib
-Warning--I didn't find a database entry for "java_socket"
-Warning--I didn't find a database entry for "wiki_network_socket"
-Warning--I didn't find a database entry for "java_tutorials_socket"
-Warning--I didn't find a database entry for "wiki_stream_socket"
-Warning--I didn't find a database entry for "java_tutorials_datagram"
-Warning--I didn't find a database entry for "wiki_datagram_socket"
 You've used 14 entries,
             1791 wiz_defined-function locations,
-            497 strings with 5094 characters,
+            491 strings with 4982 characters,
 and the built_in function-call counts, 1744 in all, are:
 = -- 126
 > -- 56
@@ -50,4 +44,3 @@ warning$ -- 0
 while$ -- 14
 width$ -- 16
 write$ -- 128
-(There were 6 warnings)
