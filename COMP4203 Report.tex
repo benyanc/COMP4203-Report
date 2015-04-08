@@ -117,7 +117,7 @@ In this section, we provide the reader with the detailed background knowledge re
 
 \subsection{XBee Modules}
 
-The XBee family of wireless modules are small radio transceivers, developed and sold by Digi International \cite{wiki_xbee}. They are based on the IEEE 802.15.4 standard, which is designed for low power and low speed devices, and operate at about 10m ranges with speeds of around 250kbit/s, although many devices do not reach this speed \cite{wiki_ieee_802_15_4}. There are two types of network nodes under this standard: a full-function device (FFD), which, as the name suggests, has full functionality, and can act as ``PAN coordinators" in the network; and a reduced-ruction device (RFD), which are simpler devices that cannot act as coordinators.
+The XBee family of wireless modules are small radio transceivers, developed and sold by Digi International \cite{wiki_xbee}. They are based on the IEEE 802.15.4 standard, which is designed for low power and low speed devices, and operate at about 10m ranges with speeds of around 250kbit/s, although many devices do not reach this speed \cite{wiki_ieee_802_15_4}. There are two types of network nodes under this standard: a full-function device (FFD), which, as the name suggests, has full functionality, and can act as ``PAN coordinators" in the network; and a reduced-function device (RFD), which are simpler devices that cannot act as coordinators.
 
 \begin{figure}[ht]
 \centering
@@ -163,7 +163,7 @@ Similar to TUN devices are TAP devices, which stands for ``network tap" \cite{wi
 
 \subsection{Data Encapsulation}
 \subsubsection{XBee Fragments}
-Although the IEEE 802.15.4 standard specifies a maximum packet size of 127 bytes, the XBee Series 2 modules that we are using only allows a maximum payload of 72 bytes, due to significant number of bytes used in the packet header \cite{digi_sending_data}. Since we are sending IP packets, which, for IPv4, have a size range between 20 and $65,535$ bytes \cite{wiki_ipv4}, it is very likely that one XBee fragment is not enough to contain the entire IP packet. Therefore, we need to be able to transmit a single IP packet over several XBee fragments.
+Although the IEEE 802.15.4 standard specifies a maximum packet size of 127 bytes, the XBee Series 2 Pro modules that we are using only allows a maximum payload of 72 bytes, due to significant number of bytes used in the packet header \cite{digi_sending_data}. Since we are sending IP packets, which, for IPv4, have a size range between 20 and $65,535$ bytes \cite{wiki_ipv4}, it is very likely that one XBee fragment is not enough to contain the entire IP packet. Therefore, we need to be able to transmit a single IP packet over several XBee fragments.
 
 \begin{figure}[ht]
 \centering
@@ -181,7 +181,7 @@ To do so, we have developed an encapsulation scheme for the 72byte XBee fragment
   \label{fig:xbee_packets_out_of_order}
 \end{figure}
 
-In the case that we transmit several IP packets, each packet over several XBee fragments, it is possible that the packets may arrive out of order. This is the reason that we employ a 2 byte ID number, and a 2 byte fragment number. Figure~\ref{fig:xbee_packets_out_of_order} shows a potential scenario where a number of fragments representing several different IP packets arrive out of order, and we must rely on the ID and fragment number to correctly construct the distinct IP packets.
+In the case that we transmit several IP packets, each packet over several XBee fragments, it is possible that the packets may arrive out of order. This is the reason that we employ a 2 byte ID number, and a 2 byte fragment number. Figure~\ref{fig:xbee_packets_out_of_order} shows a potential scenario where a number of fragments representing several different IP packets arrive out of order, and we must rely on the ID and fragment number to correctly reconstruct the original message on the receiving device.
 
 \subsubsection{Wireless Security}
 It should be noted here that our implementation does not contain any security features. Specifically, our design is highly susceptible to man-in-the-middle attacks. This type of attack could be carried out by an adversary who intercepts our radio transmissions, modifies the information, and sends the modified data. It is also possible for an adversary to simply forge XBee fragments, using valid headers and payload, and broadcast the fragments to our XBee modules.
@@ -189,6 +189,9 @@ It should be noted here that our implementation does not contain any security fe
 To protect against this attack, we could use a secure encryption algorithm to encrypt the entire XBee fragment, and send the encrypted fragment. In this case, we already have a fragment number and a secret random ID inside the encrypted fragment, so the scheme would not be vulnerable to replay attacks. Alternatively, we could encrypt the IP packet, and send portions of the encrypted packet as payload in the XBee fragments. This method is less secure, because the header portion would be unencrypted, so an adversary could forge the header and perform a replay attack. In either case, we should also ensure the authenticity of each fragment by computing a message authentication code (MAC) for the fragment. This would consume additional bytes in each message.
 
 Ultimately, we chose not to employ encryption in our design, because it would take up additional space in our already-limited fragment size. Since the goal of this project is only to explore the possibility of computer networking  using XBee modules, the security aspect is not as crucial. Additionally, due to the range limitations on the XBee modules, and the novelty in their use as a networking interface, it seems unlikely that an adversary could perform an attack undetected, under our noses.
+
+\subsubsection{Compression}
+The speed of the network is of course slow, compared to wireless internet connections. We wanted to make the transmissions as fast as possible. One of our options was to compress the messages before sending them, and then send the compressed data in fragments. We implemented a prototype version using the LZ4 data compression library; we chose LZ4 because it is supposedly a fast compression library. The default MTU is 1500 bytes and our program spends a considerable amount of time compressing and decompressing each message without much gain in speeds. Also, due to this compression, additional memory allocation and deallocation also wastes time. In the end, using compression for such small messages turned out to be slower than if it were sent uncompressed.
 
 \subsection{Summary}
 
@@ -225,7 +228,7 @@ In Figure~\ref{fig:xbee_system_distribution}, we show the network components and
 
 \subsubsection{XBLink}
 
-To enable quick setup of the XBee-based network between two computers, we have developed a program called XBLink to create a TUN device, and handle the communication from applications on the node to the XBee modules. The C++ program is compiled using g++, and runs under standard Linux systems with access to /dev/net/tun and /dev/urandom.
+To enable quick setup of the XBee-based network between two computers, we have developed a program called XBLink to create a TUN device, and handle the communication from applications on the node to the XBee modules. The C++ program can be compiled using any C++11-compliant compiler (e.g., g++ 4.7+) and runs under standard Linux systems with access to /dev/net/tun and /dev/urandom. The library \textit{libxbee} must be installed for XBLink to communicate with the devices.
 
 Once the program is compiled, it is run as follows, with a number of command line arguments:
 \begin{verbatim}
@@ -238,7 +241,7 @@ As a specific example, we create a TUN device named ``tun77", using the followin
 \begin{verbatim}
 ./xblink /dev/ttyUSB0 xbeeZB 115200 0x0013A200409E0550 tun77
 \end{verbatim}
-Here, our XBee USB adapter is located at /dev/ttyUSB0; our XBee model is ZB; the baud rate has been set at 125200; and the address of the XBee module that we're connecting to is at $0x0013A200409E0550$. Note that the XBLink program runs for the duration of the connection, and outputs useful data, such as XBee fragment info.
+Here, our XBee USB adapter is located at /dev/ttyUSB0; our XBee model is ZB; the baud rate has been set at 115200; and the address of the XBee module that we're connecting to is at $0x0013A200409E0550$. Note that the XBLink program runs for the duration of the connection, and outputs useful data, such as XBee fragment info.
 
 Once the TUN device is created and running, we must assign an IP address to it. This is done by first enabling the device as a network interface:
 \begin{verbatim}
@@ -255,11 +258,9 @@ In this section, we have described the system components in our implementation, 
 \subsection{Configuration of XBee Modules}
 \label{subsec:config}
 
-********************************************
+XBee modules must be configured properly in order for them to interact with the library, \textit{libxbee}, which allows us to programmatically communicate with the devices. First and foremost, any module that interacts with the library must enable API mode. The modules must be set to hardware flow control by enabling the AP settings RTS (request-to-send) and CTS (clear-to-send). The recommended baud rate is any rate $\leq 57600$. Higher baud rates do work in the beginning, but eventually packets start to time out.
 
-*****************************************
-
-***************************************
+If you are using XBee Series 2 Pro (also known as ZigBee) modules, one of the modules have to be set as a PAN coordinator and the other ones should be router or end-point devices with sleep timers set to OFF (end-points may not have this option and they will fall asleep stop responding after a while). To change the device role (coordinator, router or end-point), a new firmware will be installed by X-CTU.
 
 \subsection{Sample Usage}
 \label{subsec:usage}
